@@ -32,13 +32,19 @@ namespace App
             }
         }
 
+        public void RemoveBook(string book)
+        {
+            if (IsValidBook(book))
+            {
+                books.Delete(book);
+            }
+        }
+
+        public LinkedList Books => books.EnumeratesNode().OrderBy(book => book.Item).Select(book => book).;
+
         private bool IsValidBook(string book)
         {
-            if (String.IsNullOrEmpty(book))
-            {
-                return false;
-            }
-            else if (books.Find(book).Item.Equals(book))
+            if (String.IsNullOrEmpty(book) || books.Find(book).Item.Equals(book))
             {
                 return false;
             }
