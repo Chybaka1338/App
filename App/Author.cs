@@ -9,49 +9,68 @@ namespace App
 {
     internal class Author
     {
-        private string name;
-
-        private string lastName;
-
         private LinkedList books;
 
-        public string FullName => name + " " + lastName;
-        
-        public Author(string name, string lastName)
+        private string fullName;
+
+        public string FullName => fullName;
+
+        public LinkedList SortedBooks => books.EnumeratesNode().OrderBy(book => book.Item).Select(book => book).ToLinkedList();
+
+        public Author(string fullName)
         {
-            this.name = name;
-            this.lastName = lastName;
+            this.fullName = fullName;
             books = new LinkedList();
         }
 
-        public void AddBook(string book)
+        public Author(string fullName, string path)
         {
-            if (IsValidBook(book))
+            this.fullName = fullName;
+            books = new LinkedList();
+            using (var reader = new StreamReader(path, Encoding.UTF8))
+            {
+                string line;
+                while((line = reader.ReadLine()) != null)
+                {
+                    books.AddLast(line);
+                }
+            }
+        }
+
+        public bool AddBook(string book)
+        {
+            if (Validate(book))
+            {
+                books.AddLast(book);
+                return true;
+            }
+            return false;
+        }
+
+        public bool RemoveBook(string book)
+        {
+            if (Validate(book))
+            {
+                books.Delete(book);
+                return true;
+            }
+            return false;
+        }
+
+        private bool Validate(string book)
+        {
+            try
+            {
+                if(String.IsNullOrWhiteSpace(book) || books.Find(book) != null)
+                {
+                    return false;
+                }
+            } 
+            catch (Exception ex)
             {
                 books.AddLast(book);
             }
-        }
-
-        public void RemoveBook(string book)
-        {
-            if (IsValidBook(book))
-            {
-                books.Delete(book);
-            }
-        }
-
-        public LinkedList Books => books.EnumeratesNode().OrderBy(book => book.Item).Select(book => book).;
-
-        private bool IsValidBook(string book)
-        {
-            if (String.IsNullOrEmpty(book) || books.Find(book).Item.Equals(book))
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+            return true;
         }
     }
 }
