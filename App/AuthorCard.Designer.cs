@@ -35,10 +35,10 @@
             buttonConfirmNameAuthor = new Button();
             buttonConfirmNameBook = new Button();
             buttonOpenFileDialog = new Button();
-            button4 = new Button();
+            buttonCancel = new Button();
             textBoxNameAuthor = new TextBox();
             textBoxNameBook = new TextBox();
-            button5 = new Button();
+            buttonAccept = new Button();
             errorProviderNameAuthor = new ErrorProvider(components);
             errorProviderNameBook = new ErrorProvider(components);
             openFileDialog = new OpenFileDialog();
@@ -75,7 +75,7 @@
             // 
             // buttonConfirmNameAuthor
             // 
-            buttonConfirmNameAuthor.Location = new Point(340, 37);
+            buttonConfirmNameAuthor.Location = new Point(340, 38);
             buttonConfirmNameAuthor.Name = "buttonConfirmNameAuthor";
             buttonConfirmNameAuthor.Size = new Size(115, 23);
             buttonConfirmNameAuthor.TabIndex = 3;
@@ -85,7 +85,7 @@
             // 
             // buttonConfirmNameBook
             // 
-            buttonConfirmNameBook.Location = new Point(340, 88);
+            buttonConfirmNameBook.Location = new Point(340, 89);
             buttonConfirmNameBook.Name = "buttonConfirmNameBook";
             buttonConfirmNameBook.Size = new Size(115, 23);
             buttonConfirmNameBook.TabIndex = 4;
@@ -103,14 +103,15 @@
             buttonOpenFileDialog.UseVisualStyleBackColor = true;
             buttonOpenFileDialog.Click += buttonOpenFileDialog_Click;
             // 
-            // button4
+            // buttonCancel
             // 
-            button4.Location = new Point(435, 235);
-            button4.Name = "button4";
-            button4.Size = new Size(115, 23);
-            button4.TabIndex = 6;
-            button4.Text = "button4";
-            button4.UseVisualStyleBackColor = true;
+            buttonCancel.Location = new Point(435, 235);
+            buttonCancel.Name = "buttonCancel";
+            buttonCancel.Size = new Size(115, 23);
+            buttonCancel.TabIndex = 6;
+            buttonCancel.Text = "Отменить";
+            buttonCancel.UseVisualStyleBackColor = true;
+            buttonCancel.Click += buttonCancel_Click;
             // 
             // textBoxNameAuthor
             // 
@@ -126,14 +127,15 @@
             textBoxNameBook.Size = new Size(156, 23);
             textBoxNameBook.TabIndex = 8;
             // 
-            // button5
+            // buttonAccept
             // 
-            button5.Location = new Point(314, 235);
-            button5.Name = "button5";
-            button5.Size = new Size(115, 23);
-            button5.TabIndex = 9;
-            button5.Text = "button5";
-            button5.UseVisualStyleBackColor = true;
+            buttonAccept.Location = new Point(314, 235);
+            buttonAccept.Name = "buttonAccept";
+            buttonAccept.Size = new Size(115, 23);
+            buttonAccept.TabIndex = 9;
+            buttonAccept.Text = "Подтвердить";
+            buttonAccept.UseVisualStyleBackColor = true;
+            buttonAccept.Click += buttonAccept_Click;
             // 
             // errorProviderNameAuthor
             // 
@@ -152,10 +154,10 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(562, 270);
-            Controls.Add(button5);
+            Controls.Add(buttonAccept);
             Controls.Add(textBoxNameBook);
             Controls.Add(textBoxNameAuthor);
-            Controls.Add(button4);
+            Controls.Add(buttonCancel);
             Controls.Add(buttonOpenFileDialog);
             Controls.Add(buttonConfirmNameBook);
             Controls.Add(buttonConfirmNameAuthor);
@@ -170,10 +172,10 @@
         }
 
         #endregion
-        private Button button5;
+        private Button buttonAccept;
         private TextBox textBoxNameBook;
         private TextBox textBoxNameAuthor;
-        private Button button4;
+        private Button buttonCancel;
         private Button buttonOpenFileDialog;
         private Button buttonConfirmNameBook;
         private Button buttonConfirmNameAuthor;

@@ -1,30 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Text.RegularExpressions;
 
 namespace App
 {
     public partial class AuthorCard : Form
     {
         static Author author;
+        static MainWindow parrentWindow;
+        string pattern = @"(^[а-яА-Я]{3,12} {1}([а-яА-Я]{5,12} ?){2})";
 
-        public AuthorCard()
+        public AuthorCard(MainWindow form)
         {
             InitializeComponent();
+
+            parrentWindow = form;
+            parrentWindow.Hide();
 
             openFileDialog.Filter = "Text files(*.txt)|*.txt|All files(*.*)|*.*";
             //saveFileDialog1.Filter = "Text files(*.txt)|*.txt|All files(*.*)|*.*";
 
             buttonConfirmNameBook.Enabled = false;
             buttonOpenFileDialog.Enabled = false;
+            buttonAccept.Enabled = false;
         }
 
         private void buttonConfirmNameAuthor_Click(object sender, EventArgs e)
@@ -35,6 +31,7 @@ namespace App
                 textBoxNameAuthor.Enabled = false;
                 buttonConfirmNameBook.Enabled = true;
                 buttonOpenFileDialog.Enabled = true;
+                buttonAccept.Enabled = true;
             }
         }
 
@@ -65,34 +62,61 @@ namespace App
             FileDialog.ReadFromFile(path, author);
         }
 
-        #region Validating
-        internal bool ValidateNameAuthor(string name, Control control)
+        private void buttonAccept_Click(object sender, EventArgs e)
         {
-            if (String.IsNullOrWhiteSpace(name))
+            if (author != null)
             {
-                errorProviderNameAuthor.SetError(control, "Имя не указано!");
-                return false;
-            }
-
-            foreach (var c in name)
-            {
-                if (!Char.IsLetter(c))
-                {
-                    errorProviderNameAuthor.SetError(control, "Имя не может содержать цифры или спецсимволы!");
-                    return false;
-                }
-            }
-
-            if (name.Length < 5 || name.Length > 36)
-            {
-                errorProviderNameAuthor.SetError(control, "Допустимая длина имени от 5 до 36 символов!");
-                return false;
+                parrentWindow.comboBoxNameAuthors.Items.Add(author);
+                parrentWindow.comboBoxNameAuthors.Enabled = true;
+                parrentWindow.Show();
+                this.Close();
             }
             else
             {
-                errorProviderNameAuthor.Clear();
+                MessageBox.Show("Error");
+            }
+        }
+
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            parrentWindow.Show();
+            this.Close();
+        }
+
+        #region Validating
+        internal bool ValidateNameAuthor(string name, Control control)
+        {
+            if(Regex.IsMatch(name, pattern, RegexOptions.IgnoreCase))
+            {
                 return true;
             }
+            return false;
+
+            //if (String.IsNullOrWhiteSpace(name))
+            //{
+            //    errorProviderNameAuthor.SetError(control, "Имя не указано!");
+            //    return false;
+            //}
+
+            //foreach (var c in name)
+            //{
+            //    if (!Char.IsLetter(c))
+            //    {
+            //        errorProviderNameAuthor.SetError(control, "Имя не может содержать цифры или спецсимволы!");
+            //        return false;
+            //    }
+            //}
+
+            //if (name.Length < 5 || name.Length > 36)
+            //{
+            //    errorProviderNameAuthor.SetError(control, "Допустимая длина имени от 5 до 36 символов!");
+            //    return false;
+            //}
+            //else
+            //{
+            //    errorProviderNameAuthor.Clear();
+            //    return true;
+            //}
         }
 
         internal bool ValidateNameBook(string name, Control control)
