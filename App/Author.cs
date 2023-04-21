@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DynamicStructure;
+﻿using DynamicStructure;
 
 namespace App
 {
-    internal class Author
+    public class Author
     {
         private LinkedList books;
 
         public string FullName { get; set; }
+
+        public int NumberBooks => books.Count;
 
         public LinkedList SortedBooks => books.EnumeratesNode().OrderBy(book => book.Item).Select(book => book).ToLinkedList();
 
@@ -23,37 +20,33 @@ namespace App
 
         public bool AddBook(string book)
         {
-            if (Validate(book))
+            if(IsContained(book))
             {
-                books.AddLast(book);
-                return true;
+                return false;
             }
-            return false;
+
+            books.AddLast(book);
+            return true;
         }
 
         public bool RemoveBook(string book)
         {
-            if (Validate(book))
+            if(!IsContained(book))
             {
-                books.Delete(book);
-                return true;
+                return false;
             }
-            return false;
+
+            books.Delete(book);
+            return true;
         }
 
-        private bool Validate(string book)
+        private bool IsContained(string book)
         {
-            try
+            if(books.Find(book) == null)
             {
-                if(String.IsNullOrWhiteSpace(book) || books.Find(book) != null)
-                {
-                    return false;
-                }
-            } 
-            catch (Exception ex)
-            {
-                books.AddLast(book);
+                return false;
             }
+
             return true;
         }
 
