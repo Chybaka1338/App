@@ -62,6 +62,7 @@ namespace App
 
             comboBoxBookTitles.Items.Add(textBoxTitleBook.Text);
             comboBoxBookTitles_DataSourceChanged(sender, e);
+            MessageBox.Show("Книга была добавлена!", "Успешно");
             textBoxTitleBook.Clear();
         }
 
