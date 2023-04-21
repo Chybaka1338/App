@@ -9,7 +9,7 @@ namespace App
         {
             int missed = 0;
             bool isPassed = true;
-            LinkedList list = new LinkedList();
+            StringBuilder message = new StringBuilder();
 
             using (var reader = new StreamReader(path, Encoding.UTF8))
             {
@@ -18,6 +18,8 @@ namespace App
                 {
                     if (!AuthorCard.ValidateNameBook(line))
                     {
+                        message.AppendLine($"Не правильно указанное название книги: \"{line}\"\n");
+                        missed++;
                         continue;
                     }
 
@@ -27,26 +29,19 @@ namespace App
                         continue;
                     }
 
-                    list.AddLast(line);
+                    message.Append($"Данная книга уже содержится в коллекции: \"{line}\"\n");
                     missed++;
                     isPassed = false;
                 }
             }
 
-            PrintMessage(isPassed, missed, list);
+            PrintMessage(isPassed, missed, message);
         }
 
-        private static void PrintMessage(bool isPassed, int missed, LinkedList list)
+        private static void PrintMessage(bool isPassed, int missed, StringBuilder message)
         {
             if (!isPassed)
             {
-                StringBuilder message = new StringBuilder();
-                message.AppendLine("Часть или вся коллекция книг не была добавлена");
-                message.AppendLine($"Было пропущено {missed}. {(missed > 1 ? "Они" : "Она")} уже есть в коллекции книг!");
-                foreach (var node in list.EnumeratesNode())
-                {
-                    message.AppendLine("Название: " + node.Item);
-                }
                 MessageBox.Show(message.ToString(), "Внимание!");
             }
             else
