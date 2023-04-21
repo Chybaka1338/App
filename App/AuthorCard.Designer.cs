@@ -29,161 +29,195 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            openFileDialog = new OpenFileDialog();
+            textBoxFullNameAuthor = new TextBox();
+            textBoxTitleBook = new TextBox();
+            buttonConfirmAuthor = new Button();
+            buttonConfirmTitleBook = new Button();
             label1 = new Label();
             label2 = new Label();
-            label3 = new Label();
-            buttonConfirmNameAuthor = new Button();
-            buttonConfirmNameBook = new Button();
-            buttonOpenFileDialog = new Button();
-            buttonCancel = new Button();
-            textBoxNameAuthor = new TextBox();
-            textBoxNameBook = new TextBox();
             buttonAccept = new Button();
-            errorProviderNameAuthor = new ErrorProvider(components);
-            errorProviderNameBook = new ErrorProvider(components);
-            openFileDialog = new OpenFileDialog();
-            ((System.ComponentModel.ISupportInitialize)errorProviderNameAuthor).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)errorProviderNameBook).BeginInit();
+            buttonCancel = new Button();
+            errorProvider = new ErrorProvider(components);
+            comboBoxBookTitles = new ComboBox();
+            label3 = new Label();
+            label4 = new Label();
+            buttonOpenFileDialog = new Button();
+            buttonRemoveBook = new Button();
+            ((System.ComponentModel.ISupportInitialize)errorProvider).BeginInit();
             SuspendLayout();
+            // 
+            // openFileDialog
+            // 
+            openFileDialog.FileName = "openFileDialog1";
+            // 
+            // textBoxFullNameAuthor
+            // 
+            textBoxFullNameAuthor.Location = new Point(117, 12);
+            textBoxFullNameAuthor.Name = "textBoxFullNameAuthor";
+            textBoxFullNameAuthor.Size = new Size(200, 23);
+            textBoxFullNameAuthor.TabIndex = 0;
+            // 
+            // textBoxTitleBook
+            // 
+            textBoxTitleBook.Enabled = false;
+            textBoxTitleBook.Location = new Point(117, 63);
+            textBoxTitleBook.Name = "textBoxTitleBook";
+            textBoxTitleBook.Size = new Size(200, 23);
+            textBoxTitleBook.TabIndex = 1;
+            // 
+            // buttonConfirmAuthor
+            // 
+            buttonConfirmAuthor.Location = new Point(337, 12);
+            buttonConfirmAuthor.Name = "buttonConfirmAuthor";
+            buttonConfirmAuthor.Size = new Size(115, 23);
+            buttonConfirmAuthor.TabIndex = 2;
+            buttonConfirmAuthor.Text = "Подтвердить";
+            buttonConfirmAuthor.UseVisualStyleBackColor = true;
+            buttonConfirmAuthor.Click += buttonConfirmAuthor_Click;
+            // 
+            // buttonConfirmTitleBook
+            // 
+            buttonConfirmTitleBook.Enabled = false;
+            buttonConfirmTitleBook.Location = new Point(337, 63);
+            buttonConfirmTitleBook.Name = "buttonConfirmTitleBook";
+            buttonConfirmTitleBook.Size = new Size(115, 23);
+            buttonConfirmTitleBook.TabIndex = 3;
+            buttonConfirmTitleBook.Text = "Добавить";
+            buttonConfirmTitleBook.UseVisualStyleBackColor = true;
+            buttonConfirmTitleBook.Click += buttonConfirmBookTitle_Click;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(12, 41);
+            label1.Location = new Point(17, 16);
             label1.Name = "label1";
-            label1.Size = new Size(117, 15);
-            label1.TabIndex = 0;
-            label1.Text = "Введите имя Автора";
+            label1.Size = new Size(76, 15);
+            label1.TabIndex = 4;
+            label1.Text = "ФИО Автора";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(12, 92);
+            label2.Location = new Point(17, 67);
             label2.Name = "label2";
-            label2.Size = new Size(138, 15);
-            label2.TabIndex = 1;
-            label2.Text = "Введите название книги";
+            label2.Size = new Size(94, 15);
+            label2.TabIndex = 5;
+            label2.Text = "Название книги";
             // 
-            // label3
+            // buttonAccept
             // 
-            label3.AutoSize = true;
-            label3.Location = new Point(12, 149);
-            label3.Name = "label3";
-            label3.Size = new Size(86, 15);
-            label3.TabIndex = 2;
-            label3.Text = "Выбрать файл";
-            // 
-            // buttonConfirmNameAuthor
-            // 
-            buttonConfirmNameAuthor.Location = new Point(340, 38);
-            buttonConfirmNameAuthor.Name = "buttonConfirmNameAuthor";
-            buttonConfirmNameAuthor.Size = new Size(115, 23);
-            buttonConfirmNameAuthor.TabIndex = 3;
-            buttonConfirmNameAuthor.Text = "Подтвердить";
-            buttonConfirmNameAuthor.UseVisualStyleBackColor = true;
-            buttonConfirmNameAuthor.Click += buttonConfirmNameAuthor_Click;
-            // 
-            // buttonConfirmNameBook
-            // 
-            buttonConfirmNameBook.Location = new Point(340, 89);
-            buttonConfirmNameBook.Name = "buttonConfirmNameBook";
-            buttonConfirmNameBook.Size = new Size(115, 23);
-            buttonConfirmNameBook.TabIndex = 4;
-            buttonConfirmNameBook.Text = "Подтвердить";
-            buttonConfirmNameBook.UseVisualStyleBackColor = true;
-            buttonConfirmNameBook.Click += buttonConfirmNameBook_Click;
-            // 
-            // buttonOpenFileDialog
-            // 
-            buttonOpenFileDialog.Location = new Point(178, 145);
-            buttonOpenFileDialog.Name = "buttonOpenFileDialog";
-            buttonOpenFileDialog.Size = new Size(115, 23);
-            buttonOpenFileDialog.TabIndex = 5;
-            buttonOpenFileDialog.Text = "Открыть";
-            buttonOpenFileDialog.UseVisualStyleBackColor = true;
-            buttonOpenFileDialog.Click += buttonOpenFileDialog_Click;
+            buttonAccept.Enabled = false;
+            buttonAccept.Location = new Point(314, 235);
+            buttonAccept.Name = "buttonAccept";
+            buttonAccept.Size = new Size(115, 23);
+            buttonAccept.TabIndex = 6;
+            buttonAccept.Text = "Принять";
+            buttonAccept.UseVisualStyleBackColor = true;
+            buttonAccept.Click += buttonAccept_Click;
             // 
             // buttonCancel
             // 
             buttonCancel.Location = new Point(435, 235);
             buttonCancel.Name = "buttonCancel";
             buttonCancel.Size = new Size(115, 23);
-            buttonCancel.TabIndex = 6;
+            buttonCancel.TabIndex = 7;
             buttonCancel.Text = "Отменить";
             buttonCancel.UseVisualStyleBackColor = true;
             buttonCancel.Click += buttonCancel_Click;
             // 
-            // textBoxNameAuthor
+            // errorProvider
             // 
-            textBoxNameAuthor.Location = new Point(178, 38);
-            textBoxNameAuthor.Name = "textBoxNameAuthor";
-            textBoxNameAuthor.Size = new Size(156, 23);
-            textBoxNameAuthor.TabIndex = 7;
+            errorProvider.ContainerControl = this;
             // 
-            // textBoxNameBook
+            // comboBoxBookTitles
             // 
-            textBoxNameBook.Location = new Point(178, 89);
-            textBoxNameBook.Name = "textBoxNameBook";
-            textBoxNameBook.Size = new Size(156, 23);
-            textBoxNameBook.TabIndex = 8;
+            comboBoxBookTitles.Enabled = false;
+            comboBoxBookTitles.FormattingEnabled = true;
+            comboBoxBookTitles.Location = new Point(117, 114);
+            comboBoxBookTitles.Name = "comboBoxBookTitles";
+            comboBoxBookTitles.Size = new Size(200, 23);
+            comboBoxBookTitles.TabIndex = 8;
             // 
-            // buttonAccept
+            // label3
             // 
-            buttonAccept.Location = new Point(314, 235);
-            buttonAccept.Name = "buttonAccept";
-            buttonAccept.Size = new Size(115, 23);
-            buttonAccept.TabIndex = 9;
-            buttonAccept.Text = "Подтвердить";
-            buttonAccept.UseVisualStyleBackColor = true;
-            buttonAccept.Click += buttonAccept_Click;
+            label3.AutoSize = true;
+            label3.Location = new Point(17, 117);
+            label3.Name = "label3";
+            label3.Size = new Size(85, 15);
+            label3.TabIndex = 9;
+            label3.Text = "Удалить книгу";
             // 
-            // errorProviderNameAuthor
+            // label4
             // 
-            errorProviderNameAuthor.ContainerControl = this;
+            label4.AutoSize = true;
+            label4.Location = new Point(17, 171);
+            label4.Name = "label4";
+            label4.Size = new Size(86, 15);
+            label4.TabIndex = 10;
+            label4.Text = "Открыть файл";
             // 
-            // errorProviderNameBook
+            // buttonOpenFileDialog
             // 
-            errorProviderNameBook.ContainerControl = this;
+            buttonOpenFileDialog.Enabled = false;
+            buttonOpenFileDialog.Location = new Point(117, 167);
+            buttonOpenFileDialog.Name = "buttonOpenFileDialog";
+            buttonOpenFileDialog.Size = new Size(115, 23);
+            buttonOpenFileDialog.TabIndex = 11;
+            buttonOpenFileDialog.Text = "Открыть";
+            buttonOpenFileDialog.UseVisualStyleBackColor = true;
+            buttonOpenFileDialog.Click += buttonOpenFileDialog_Click;
             // 
-            // openFileDialog
+            // buttonRemoveBook
             // 
-            openFileDialog.FileName = "openFileDialog1";
+            buttonRemoveBook.Enabled = false;
+            buttonRemoveBook.Location = new Point(337, 113);
+            buttonRemoveBook.Name = "buttonRemoveBook";
+            buttonRemoveBook.Size = new Size(115, 23);
+            buttonRemoveBook.TabIndex = 12;
+            buttonRemoveBook.Text = "Удалить";
+            buttonRemoveBook.UseVisualStyleBackColor = true;
+            buttonRemoveBook.Click += buttonRemoveBook_Click;
             // 
             // AuthorCard
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(562, 270);
-            Controls.Add(buttonAccept);
-            Controls.Add(textBoxNameBook);
-            Controls.Add(textBoxNameAuthor);
-            Controls.Add(buttonCancel);
+            Controls.Add(buttonRemoveBook);
             Controls.Add(buttonOpenFileDialog);
-            Controls.Add(buttonConfirmNameBook);
-            Controls.Add(buttonConfirmNameAuthor);
+            Controls.Add(label4);
             Controls.Add(label3);
+            Controls.Add(comboBoxBookTitles);
+            Controls.Add(buttonCancel);
+            Controls.Add(buttonAccept);
             Controls.Add(label2);
             Controls.Add(label1);
+            Controls.Add(buttonConfirmTitleBook);
+            Controls.Add(buttonConfirmAuthor);
+            Controls.Add(textBoxTitleBook);
+            Controls.Add(textBoxFullNameAuthor);
             Name = "AuthorCard";
-            ((System.ComponentModel.ISupportInitialize)errorProviderNameAuthor).EndInit();
-            ((System.ComponentModel.ISupportInitialize)errorProviderNameBook).EndInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-        private Button buttonAccept;
-        private TextBox textBoxNameBook;
-        private TextBox textBoxNameAuthor;
-        private Button buttonCancel;
-        private Button buttonOpenFileDialog;
-        private Button buttonConfirmNameBook;
-        private Button buttonConfirmNameAuthor;
-        private Label label3;
-        private Label label2;
-        private Label label1;
-        private ErrorProvider errorProviderNameAuthor;
-        private ErrorProvider errorProviderNameBook;
         private OpenFileDialog openFileDialog;
+        private TextBox textBoxFullNameAuthor;
+        private TextBox textBoxTitleBook;
+        private Button buttonConfirmAuthor;
+        private Button buttonConfirmTitleBook;
+        private Label label1;
+        private Label label2;
+        private Button buttonAccept;
+        private Button buttonCancel;
+        private ErrorProvider errorProvider;
+        private ComboBox comboBoxBookTitles;
+        private Label label3;
+        private Button buttonOpenFileDialog;
+        private Label label4;
+        private Button buttonRemoveBook;
     }
 }
