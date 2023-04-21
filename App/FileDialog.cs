@@ -5,7 +5,7 @@ namespace App
 {
     internal static class FileDialog
     {
-        internal static void ReadFromFile(string path, Author author)
+        internal static void ReadFromFile(string path, Author author, ComboBox box)
         {
             int missed = 0;
             bool isPassed = true;
@@ -13,50 +13,64 @@ namespace App
 
             using (var reader = new StreamReader(path, Encoding.UTF8))
             {
-                string line; 
-                while((line = reader.ReadLine()) != null)
+                string line;
+                while ((line = reader.ReadLine()) != null)
                 {
-                    if (Validate(line))
+                    if (!AuthorCard.ValidateNameBook(line))
                     {
-                        if (author.AddBook(line) == false)
-                        {
-                            list.AddLast(line);
-                            missed++;
-                            isPassed = false;
-                        }
+                        continue;
                     }
-                    else
+
+                    if (author.AddBook(line))
                     {
-                        missed++;
+                        box.Items.Add(line);
+                        continue;
                     }
+
+                    list.AddLast(line);
+                    missed++;
+                    isPassed = false;
                 }
             }
 
-            if(!isPassed)
-            {
-                StringBuilder message = new StringBuilder();
-                message.AppendLine($"Было пропущено {missed}. {(missed > 1 ? "Они" : "Она")} уже есть в коллекции книг!");
-                foreach(var node in list.EnumeratesNode())
-                {
-                    message.AppendLine("Название: " + node.Item);   
-                }
-                MessageBox.Show(message.ToString());
-            }
+            PrintMessage(isPassed, missed, list);
         }
 
-        internal static bool Validate(string line)
+        private static void PrintMessage(bool isPassed, int missed, LinkedList list)
         {
-            if(String.IsNullOrWhiteSpace(line))
+            if (!isPassed)
             {
-                return false;
-            }
-            else if(line.Length > 36)
-            {
-                return false;
+                StringBuilder message = new StringBuilder();
+                message.AppendLine("Часть или вся коллекция книг не была добавлена");
+                message.AppendLine($"Было пропущено {missed}. {(missed > 1 ? "Они" : "Она")} уже есть в коллекции книг!");
+                foreach (var node in list.EnumeratesNode())
+                {
+                    message.AppendLine("Название: " + node.Item);
+                }
+                MessageBox.Show(message.ToString(), "Внимание!");
             }
             else
             {
-                return true;
+                MessageBox.Show("Книги были добавлены", "Успешно");
+            }
+        }
+
+        internal static void SaveFile(string path, Author author)
+        {
+            if (!File.Exists(path))
+            {
+                MessageBox.Show("Файл не найден!");
+                return;
+            }
+
+            bool append = File.ReadAllLines(path, Encoding.UTF8).Length > 0;
+            using (var writer = new StreamWriter(path, append, Encoding.UTF8))
+            {
+                writer.WriteLine($"ФИО: {author.FullName}\nСписок книг в алфавитном порядке:");
+                foreach (var book in author.SortedBooks.EnumeratesNode())
+                {
+                    writer.WriteLine(book.Item);
+                }
             }
         }
     }
