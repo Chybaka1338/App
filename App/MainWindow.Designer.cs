@@ -28,46 +28,150 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            openFileDialog1 = new OpenFileDialog();
-            saveFileDialog1 = new SaveFileDialog();
-            errorProvider1 = new ErrorProvider(components);
-            button1 = new Button();
-            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
+            saveFileDialog = new SaveFileDialog();
+            label1 = new Label();
+            buttonAddNewAuthor = new Button();
+            comboBoxNameAuthors = new ComboBox();
+            label2 = new Label();
+            richTextBox = new RichTextBox();
+            buttonSaveFileDialog = new Button();
+            label5 = new Label();
+            label6 = new Label();
+            buttonEditAuthor = new Button();
+            buttonPrintBooks = new Button();
             SuspendLayout();
             // 
-            // openFileDialog1
+            // label1
             // 
-            openFileDialog1.FileName = "openFileDialog1";
+            label1.AutoSize = true;
+            label1.Location = new Point(24, 30);
+            label1.Name = "label1";
+            label1.Size = new Size(101, 15);
+            label1.TabIndex = 18;
+            label1.Text = "Добавить Автора";
             // 
-            // errorProvider1
+            // buttonAddNewAuthor
             // 
-            errorProvider1.ContainerControl = this;
+            buttonAddNewAuthor.Location = new Point(138, 26);
+            buttonAddNewAuthor.Name = "buttonAddNewAuthor";
+            buttonAddNewAuthor.Size = new Size(115, 23);
+            buttonAddNewAuthor.TabIndex = 19;
+            buttonAddNewAuthor.Text = "Добавить";
+            buttonAddNewAuthor.UseVisualStyleBackColor = true;
+            buttonAddNewAuthor.Click += buttonAddNewAuthor_Click;
             // 
-            // button1
+            // comboBoxNameAuthors
             // 
-            button1.Location = new Point(349, 137);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 17;
-            button1.Text = "добавить";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            comboBoxNameAuthors.Enabled = false;
+            comboBoxNameAuthors.FormattingEnabled = true;
+            comboBoxNameAuthors.Location = new Point(138, 81);
+            comboBoxNameAuthors.Name = "comboBoxNameAuthors";
+            comboBoxNameAuthors.Size = new Size(200, 23);
+            comboBoxNameAuthors.TabIndex = 20;
+            comboBoxNameAuthors.SelectedIndexChanged += comboBoxNameAuthors_SelectedIndexChanged;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(24, 84);
+            label2.Name = "label2";
+            label2.Size = new Size(96, 15);
+            label2.TabIndex = 21;
+            label2.Text = "Выбрать Автора";
+            // 
+            // richTextBox
+            // 
+            richTextBox.Location = new Point(465, 30);
+            richTextBox.Name = "richTextBox";
+            richTextBox.ReadOnly = true;
+            richTextBox.Size = new Size(249, 276);
+            richTextBox.TabIndex = 22;
+            richTextBox.Text = "";
+            // 
+            // buttonSaveFileDialog
+            // 
+            buttonSaveFileDialog.Enabled = false;
+            buttonSaveFileDialog.Location = new Point(138, 128);
+            buttonSaveFileDialog.Name = "buttonSaveFileDialog";
+            buttonSaveFileDialog.Size = new Size(115, 23);
+            buttonSaveFileDialog.TabIndex = 27;
+            buttonSaveFileDialog.Text = "Сохранить";
+            buttonSaveFileDialog.UseVisualStyleBackColor = true;
+            buttonSaveFileDialog.Click += buttonSaveFileDialog_Click;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(24, 132);
+            label5.Name = "label5";
+            label5.Size = new Size(66, 15);
+            label5.TabIndex = 28;
+            label5.Text = "Сохранить";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(24, 178);
+            label6.Name = "label6";
+            label6.Size = new Size(87, 15);
+            label6.TabIndex = 30;
+            label6.Text = "Редактировать";
+            // 
+            // buttonEditAuthor
+            // 
+            buttonEditAuthor.Enabled = false;
+            buttonEditAuthor.Location = new Point(138, 174);
+            buttonEditAuthor.Name = "buttonEditAuthor";
+            buttonEditAuthor.Size = new Size(115, 23);
+            buttonEditAuthor.TabIndex = 31;
+            buttonEditAuthor.Text = "Редактировать";
+            buttonEditAuthor.UseVisualStyleBackColor = true;
+            buttonEditAuthor.Click += buttonEditAuthor_Click;
+            // 
+            // buttonPrintBooks
+            // 
+            buttonPrintBooks.Enabled = false;
+            buttonPrintBooks.Location = new Point(344, 80);
+            buttonPrintBooks.Name = "buttonPrintBooks";
+            buttonPrintBooks.Size = new Size(115, 23);
+            buttonPrintBooks.TabIndex = 32;
+            buttonPrintBooks.Text = "Напечатать книги";
+            buttonPrintBooks.UseVisualStyleBackColor = true;
+            buttonPrintBooks.Click += buttonPrintBooks_Click;
             // 
             // MainWindow
             // 
             AutoScaleMode = AutoScaleMode.Inherit;
-            ClientSize = new Size(801, 337);
-            Controls.Add(button1);
+            ClientSize = new Size(719, 311);
+            Controls.Add(buttonPrintBooks);
+            Controls.Add(buttonEditAuthor);
+            Controls.Add(label6);
+            Controls.Add(label5);
+            Controls.Add(buttonSaveFileDialog);
+            Controls.Add(richTextBox);
+            Controls.Add(label2);
+            Controls.Add(comboBoxNameAuthors);
+            Controls.Add(buttonAddNewAuthor);
+            Controls.Add(label1);
             Name = "MainWindow";
-            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
-        private OpenFileDialog openFileDialog1;
-        private SaveFileDialog saveFileDialog1;
-        private ErrorProvider errorProvider1;
-        private Button button1;
+        private Label label1;
+        private Label label2;
+        private Label label5;
+
+        private RichTextBox richTextBox;
+        internal ComboBox comboBoxNameAuthors;
+
+        private Button buttonAddNewAuthor;
+        internal Button buttonSaveFileDialog;
+
+        private SaveFileDialog saveFileDialog;
+        private Button buttonEditAuthor;
+        private Label label6;
+        private Button buttonPrintBooks;
     }
 }
