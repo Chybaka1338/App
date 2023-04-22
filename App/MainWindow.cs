@@ -33,9 +33,8 @@ namespace App
         {
             if (saveFileDialog.ShowDialog() == DialogResult.Cancel) return;
 
-            var path = saveFileDialog.FileName;
-            FileDialog.SaveFile(path, comboBoxNameAuthors.SelectedItem as Author);
-            MessageBox.Show("Файл сохранен", "Успешно");
+            if (!File.Exists(saveFileDialog.FileName)) File.Create(saveFileDialog.FileName).Close();
+            FileDialog.SaveFile(saveFileDialog.FileName, comboBoxNameAuthors.SelectedItem as Author);
         }
 
         private void buttonPrintBooks_Click(object sender, EventArgs e)
