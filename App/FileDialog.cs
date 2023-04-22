@@ -52,14 +52,7 @@ namespace App
 
         internal static void SaveFile(string path, Author author)
         {
-            if (!File.Exists(path))
-            {
-                MessageBox.Show("Файл не найден!");
-                return;
-            }
-
-            bool append = File.ReadAllLines(path, Encoding.UTF8).Length > 0;
-            using (var writer = new StreamWriter(path, append, Encoding.UTF8))
+            using (var writer = new StreamWriter(path, true, Encoding.UTF8))
             {
                 writer.WriteLine($"ФИО: {author.FullName}\nСписок книг в алфавитном порядке:");
                 foreach (var book in author.SortedBooks.EnumeratesNode())
@@ -67,6 +60,7 @@ namespace App
                     writer.WriteLine(book.Item);
                 }
             }
+            MessageBox.Show("Файл сохранен", "Успешно");
         }
     }
 }
