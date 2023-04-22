@@ -12,7 +12,6 @@ namespace App
             InitializeComponent();
 
             comboBoxNameAuthors.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBoxNameAuthors.SelectedIndexChanged += comboBoxNameAuthors_SelectedIndexChanged;
             saveFileDialog.Filter = "Text files(*.txt)|*.txt|All files(*.*)|*.*";
         }
 
