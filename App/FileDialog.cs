@@ -54,7 +54,6 @@ namespace App
         {
             using (var writer = new StreamWriter(path, true, Encoding.UTF8))
             {
-                writer.WriteLine($"ФИО: {author.FullName}\nСписок книг в алфавитном порядке:");
                 foreach (var book in author.SortedBooks.EnumeratesNode())
                 {
                     writer.WriteLine(book.Item);
